@@ -75,8 +75,7 @@
                                            "Sync with the local directory"
                                            "Clone again and re-index the db")
                                   :on-click (fn []
-                                              (repo-handler/re-index! nfs-handler/rebuild-index!)
-                                              )}
+                                              (repo-handler/re-index! nfs-handler/rebuild-index!))}
                  "Re-index"]
                 ;; [:a.control.ml-4 {:title "Export as JSON"
                 ;;                   :on-click (fn []
@@ -127,19 +126,19 @@
              (when pushing? svg/loading)
              (ui/dropdown
               (fn [{:keys [toggle-fn]}]
-                [:div.cursor.w-2.h-2.sync-status.mr-2
-                 {:class (cond
-                           git-failed?
-                           "bg-red-500"
-                           (or
-                            ;; (not db-persisted?)
-                            editing?
-                            should-push? pushing?)
-                           "bg-orange-400"
-                           :else
-                           "bg-green-600")
-                  :style {:border-radius "50%"
-                          :margin-top 2}
+                [:div.cursor.w-2.h-2.sync-status.mr-2.bg-indigo-600
+                 {:style {:border-radius "50%"
+                          :margin-top 2
+                          :background-color (cond
+                                              git-failed?
+                                              "#f56565"
+                                              (or
+                                              ;; (not db-persisted?)
+                                               editing?
+                                               should-push? pushing?)
+                                              "#f6ad55"
+                                              :else
+                                              "#38a169")}
                   :on-mouse-over
                   (fn [e]
                     (toggle-fn)
